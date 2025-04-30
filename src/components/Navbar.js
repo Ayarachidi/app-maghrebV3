@@ -1,9 +1,9 @@
 export default function Navbar() {
   return (
     <div className="relative text-black overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-10 py-4 md:py-6">
+      <div className="w-full bg-grqy-200 mx-auto flex justify-between items-center px-6 md:px-10 py-4 md:py-6 ">
         {/* Logo seul, agrandi */}
-        <div className="flex items-center">
+        <div className="flex items-center  xl:ml-10">
           <img
             src="/images/logo.png"
             alt="Logo"
@@ -12,7 +12,7 @@ export default function Navbar() {
         </div>
 
         {/* Liens placés un peu plus haut */}
-        <div className="flex space-x-4 md:space-x-6 text-sm md:text-lg -mt-6"> 
+        <div className="flex space-x-4 md:space-x-6 text-sm md:text-lg lg:-mt-10 z-100 -mt-6  xl:mr-10"> 
           <a href="/" className="hover:underline">
             Home
           </a>
