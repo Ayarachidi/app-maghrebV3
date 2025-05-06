@@ -1,25 +1,49 @@
-// Tabs.js
+import { useEffect, useRef, useState } from "react";
+
 export default function Tabs({ activeTab, setActiveTab }) {
   const tabs = [
     "DOMAIN SEARCH",
     "WHOIS INFORMATION",
-    "REVERSE IP LOOKUP",
-    "DNS LOOKUP",
+   
   ];
 
+  const containerRef = useRef(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const buttons = container?.querySelectorAll("button");
+
+    const activeIndex = tabs.indexOf(activeTab);
+    if (buttons && buttons[activeIndex]) {
+      const activeButton = buttons[activeIndex];
+      const { offsetLeft, offsetWidth } = activeButton;
+      setIndicatorStyle({
+        left: offsetLeft,
+        width: offsetWidth,
+      });
+    }
+  }, [activeTab]);
+
   return (
-    <div className="flex flex-wrap gap-3 sm:gap-4 my-4">
-      {tabs.map((label, idx) => (
-        <button
-          key={idx}
-          onClick={() => setActiveTab(label)}
-          className={`flex-1 min-w-[150px] sm:min-w-[180px] md:min-w-[200px] py-3 sm:py-4 px-2 rounded-md shadow text-center font-semibold text-sm sm:text-base transition ${
-            activeTab === label ? "bg-green-600 text-white" : "bg-white text-gray-800"
-          }`}
-        >
-          {label}
-        </button>
-      ))}
+    <div className="relative" ref={containerRef}>
+      <div className="flex gap-3 sm:gap-4 my-4 relative">
+        {tabs.map((label, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveTab(label)}
+            className={`relative flex-1 min-w-[150px] sm:min-w-[180px] md:min-w-[200px] py-3 sm:py-4 px-2 rounded-md font-semibold text-sm sm:text-base text-center transition-all duration-300 ease-in-out
+              ${activeTab === label ? "text-green-700" : "text-gray-800"}
+              hover:bg-green-50 hover:scale-[1.03]`}
+          >
+            {label}
+          </button>
+        ))}
+        <span
+          className="absolute bottom-0 h-[3px] bg-green-600 rounded transition-all duration-300"
+          style={{ ...indicatorStyle, position: "absolute" }}
+        />
+      </div>
     </div>
   );
 }

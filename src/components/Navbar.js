@@ -13,11 +13,9 @@ export default function Navbar() {
 
         {/* Liens placés un peu plus haut */}
         <div className="flex space-x-4 md:space-x-6 text-sm md:text-lg lg:-mt-10 z-100 -mt-6  xl:mr-10"> 
+          
           <a href="/" className="hover:underline">
-            Home
-          </a>
-          <a href="/contact" className="hover:underline">
-            Contact Us
+          Home
           </a>
         </div>
       </div>

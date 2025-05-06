@@ -25,7 +25,7 @@ function App() {
         <InfoCards />
         <FaqSec />
       </div>
-      <Footer />
+      <Footer setActiveTab={setActiveTab} />
     </div>
   );
 }
