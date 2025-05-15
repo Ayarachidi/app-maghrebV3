@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function Tabs({ activeTab, setActiveTab }) {
-  const tabs = [
-    "DOMAIN SEARCH",
-    "WHOIS INFORMATION",
-   
-  ];
+// En dehors du composant
+const tabLabels = ["DOMAIN SEARCH"];
 
+export default function Tabs({ activeTab, setActiveTab }) {
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
@@ -14,7 +11,7 @@ export default function Tabs({ activeTab, setActiveTab }) {
     const container = containerRef.current;
     const buttons = container?.querySelectorAll("button");
 
-    const activeIndex = tabs.indexOf(activeTab);
+    const activeIndex = tabLabels.indexOf(activeTab);
     if (buttons && buttons[activeIndex]) {
       const activeButton = buttons[activeIndex];
       const { offsetLeft, offsetWidth } = activeButton;
@@ -23,12 +20,12 @@ export default function Tabs({ activeTab, setActiveTab }) {
         width: offsetWidth,
       });
     }
-  }, [activeTab]);
+  }, [activeTab]); // ✅ plus de warning
 
   return (
     <div className="relative" ref={containerRef}>
       <div className="flex gap-3 sm:gap-4 my-4 relative">
-        {tabs.map((label, idx) => (
+        {tabLabels.map((label, idx) => (
           <button
             key={idx}
             onClick={() => setActiveTab(label)}

@@ -2,28 +2,27 @@ export default function InfoCards() {
   const cards = [
     {
       icon: "/images/card1.png",
-      title: "CHECK DOMAIN AVAILABILITY",
-      text: "Check whether a Domain Name is available for registration or not via our Domain Search Tool.",
+      title: "CHECK A DOMAIN NAME",
+      text: "Search domain details easily using our Domain Search tool.",
     },
     {
       icon: "/images/domainname.png",
-      title: "FIND DOMAIN OWNER INFORMATION",
-      text: "Use the WHOIS information tool to find out a domain's owner, location, ip and other information.",
+      title: "FIND OUT WHO OWNS A DOMAIN",
+      text: "Get information about the domain holder, location, and related entities.",
     },
     {
       icon: "/images/card3.png",
-      title: "FIND OUT DOMAIN EXPIRY",
-      text: "Looking out for a domain name that you want to claim? Learn when a domain will expire with our whois & search tools.",
+      title: "CHECK EXPIRATION DATE",
+      text: "See when a domain will expire and plan accordingly.",
     },
   ];
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10 mb-10">
-
       {cards.map((card, idx) => (
         <div
           key={idx}
-          className="bg-white p-10 rounded-sm shadow-xl  shadow-t-xl text-center transform transition-transform hover:scale-105"
+          className="bg-white p-10 rounded-sm shadow-xl text-center transform transition-transform hover:scale-105"
         >
           <div className="mb-6 flex justify-center">
             <img src={card.icon} alt="icon" className="w-30 h-30" />

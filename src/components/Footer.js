@@ -21,17 +21,6 @@ function Footer({ setActiveTab }) {
     .MA Domain Name
   </button>
 </li>
-<li>
-  <button
-    onClick={() => {
-      setActiveTab("WHOIS INFORMATION");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }}
-    className="hover:underline text-left"
-  >
-    WHOIS .ma
-  </button>
-</li>
 
             </ul>
           </div>
