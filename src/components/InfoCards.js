@@ -1,4 +1,9 @@
+/**
+ * Composant InfoCards affichant une grille de cartes d'information.
+ * Chaque carte contient une icône, un titre et un texte descriptif.
+ */
 export default function InfoCards() {
+  // Liste des cartes à afficher
   const cards = [
     {
       icon: "/images/card1.png",
@@ -20,16 +25,34 @@ export default function InfoCards() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10 mb-10">
       {cards.map((card, idx) => (
-        <div
+        <article
           key={idx}
           className="bg-white p-10 rounded-sm shadow-xl text-center transform transition-transform hover:scale-105"
+          role="region"
+          aria-labelledby={`card-title-${idx}`}
         >
           <div className="mb-6 flex justify-center">
-            <img src={card.icon} alt="icon" className="w-30 h-30" />
+            {/* 
+              Ajout d'un alt pertinent pour l'image.
+              Si l’image est purement décorative, alt="" pour ignorer.
+              Ici on utilise alt="" car l’info est dans le titre/text.
+            */}
+            <img
+              src={card.icon}
+              alt=""
+              aria-hidden="true"
+              className="w-30 h-30"
+              loading="lazy"
+            />
           </div>
-          <h3 className="font-bold mb-4 text-xl">{card.title}</h3>
+          <h3
+            id={`card-title-${idx}`}
+            className="font-bold mb-4 text-xl"
+          >
+            {card.title}
+          </h3>
           <p className="text-gray-700 text-base">{card.text}</p>
-        </div>
+        </article>
       ))}
     </div>
   );
