@@ -1,36 +1,44 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { useRef, useState, useEffect } from 'react';
 
-const useRecaptcha = () => {
-  const [capchaToken, setCapchaToken] = useState('');
+export default function useRecaptcha() {
   const recaptchaRef = useRef(null);
-
-  const handleRecaptcha = useCallback((token) => {
-    setCapchaToken(token || '');
-  }, []);
+  const [capchaToken, setCapchaToken] = useState("");
 
   useEffect(() => {
+    let isMounted = true;
+    let tokenRefreshTimeout = null;
+
     const refreshCaptcha = () => {
-      if (recaptchaRef.current && capchaToken) {
+      if (isMounted && recaptchaRef.current?.reset) {
         recaptchaRef.current.reset();
         setCapchaToken('');
       }
     };
 
-    let tokenRefreshTimeout = null;
-
-    if (capchaToken) {
-      tokenRefreshTimeout = setTimeout(refreshCaptcha, 110000); // 110 seconds
+    if (capchaToken && recaptchaRef.current) {
+      tokenRefreshTimeout = setTimeout(refreshCaptcha, 110000); // 110 sec
     }
 
     return () => {
+      isMounted = false;
       if (tokenRefreshTimeout) {
         clearTimeout(tokenRefreshTimeout);
       }
     };
   }, [capchaToken]);
 
-  return { capchaToken, recaptchaRef, handleRecaptcha };
-};
+  const handleRecaptcha = (token) => {
+    setCapchaToken(token);
+  };
 
-export default useRecaptcha;
+  // Nouvelle fonction à exposer pour reset manuel
+  const resetCaptcha = () => {
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset();
+    }
+    setCapchaToken('');
+  };
+
+  return { recaptchaRef, capchaToken, handleRecaptcha, resetCaptcha };
+}
+
